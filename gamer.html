@@ -44,6 +44,7 @@
         document.documentElement.classList.add('dark');
         localStorage.theme = 'dark';
       }
+      updateIcon(); // Call updateIcon here
     }
   </script>
 
@@ -368,8 +369,6 @@
     // Run on load
     updateIcon();
 
-    // Update icon whenever theme toggles
-    document.querySelector('button[aria-label="Toggle Dark Mode"]').addEventListener('click', updateIcon);
   </script>
 </body>
 </html>
