@@ -357,11 +357,11 @@
 
     function updateIcon() {
       if (document.documentElement.classList.contains('dark')) {
-        sunPath.classList.remove('hidden');
-        moonPath.classList.add('hidden');
-      } else {
         sunPath.classList.add('hidden');
         moonPath.classList.remove('hidden');
+      } else {
+        sunPath.classList.remove('hidden');
+        moonPath.classList.add('hidden');
       }
     }
 
