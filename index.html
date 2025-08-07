@@ -1,379 +1,446 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Realm of Legends Companion</title>
-  <!-- Tailwind CSS CDN with dark mode enabled via class strategy -->
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {},
-      },
-      variants: {},
-      plugins: [],
-    }
-  </script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    html {
-      scroll-behavior: smooth;
-    }
-  </style>
-</head>
-<body class="bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-100">
-  <!-- Theme Toggle Script -->
-  <script>
-    // Initialize theme on load
-    if (
-      localStorage.theme === 'dark' ||
-      (!('theme' in localStorage) &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
-      document.documentElement.classList.add('dark');
-      document.body.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      document.body.classList.remove('dark');
-    }
-
-    function toggleTheme() {
-      if (document.documentElement.classList.contains('dark')) {
-        document.documentElement.classList.remove('dark');
-        document.body.classList.remove('dark');
-        localStorage.theme = 'light';
-      } else {
-        document.documentElement.classList.add('dark');
-        document.body.classList.add('dark');
-        localStorage.theme = 'dark';
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Realm of Legends Companion</title>
+    <!-- Tailwind CSS CDN with dark mode enabled via class strategy -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {},
+        },
+        variants: {},
+        plugins: [],
+      };
+    </script>
+    <style>
+      html {
+        scroll-behavior: smooth;
       }
-    }
-  </script>
+    </style>
+  </head>
+  <body class="bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-100">
+    <!-- Theme Toggle Script -->
+    <script>
+      // Initialize theme on load
+      function setInitialTheme() {
+        if (
+          localStorage.theme === "dark" ||
+          (!("theme" in localStorage) &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches)
+        ) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      }
+      setInitialTheme();
 
-  <!-- Navbar -->
-  <nav class="fixed w-full bg-white/90 backdrop-blur-lg dark:bg-gray-800/90 z-10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between h-16">
-        <div class="flex items-center">
-          <a href="#" class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">
-            Realm of Legends
+      function toggleTheme() {
+        if (document.documentElement.classList.contains("dark")) {
+          document.documentElement.classList.remove("dark");
+          localStorage.theme = "light";
+        } else {
+          document.documentElement.classList.add("dark");
+          localStorage.theme = "dark";
+        }
+        updateIcon(); // Ensure icon updates after theme change
+      }
+    </script>
+
+    <!-- Navbar -->
+    <nav
+      class="fixed w-full bg-white/90 backdrop-blur-lg dark:bg-gray-800/90 z-10"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <div class="flex items-center">
+            <a
+              href="#"
+              class="text-2xl font-bold text-indigo-600 dark:text-indigo-400"
+            >
+              Realm of Legends
+            </a>
+          </div>
+          <div class="flex items-center space-x-4">
+            <a
+              href="#about"
+              class="hover:text-indigo-600 dark:hover:text-indigo-400"
+              >About</a
+            >
+            <a
+              href="#features"
+              class="hover:text-indigo-600 dark:hover:text-indigo-400"
+              >Features</a
+            >
+            <a
+              href="#guides"
+              class="hover:text-indigo-600 dark:hover:text-indigo-400"
+              >Guides</a
+            >
+            <a
+              href="#leaderboard"
+              class="hover:text-indigo-600 dark:hover:text-indigo-400"
+              >Leaderboard</a
+            >
+            <a
+              href="#download"
+              class="hover:text-indigo-600 dark:hover:text-indigo-400"
+              >Download</a
+            >
+            <button
+              onclick="toggleTheme()"
+              aria-label="Toggle Dark Mode"
+              class="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700"
+            >
+              <svg
+                id="theme-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 text-gray-800 dark:text-gray-100"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  id="moon-path"
+                  class="hidden"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"
+                />
+                <path
+                  id="sun-path"
+                  class=""
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 2v2m0 16v2m9-10h-2M5 12H3m15.364-6.364l-1.414 1.414M7.05 16.95l-1.414 1.414m12.728 0l-1.414-1.414M7.05 7.05L5.636 5.636M12 6a6 6 0 100 12 6 6 0 000-12z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header
+      id="about"
+      class="pt-20 bg-gradient-to-r from-indigo-500 to-purple-600 dark:from-gray-800 dark:to-gray-900 text-white"
+    >
+      <div class="max-w-7xl mx-auto py-20 px-4 text-center">
+        <h1 class="text-5xl font-extrabold mb-4">Realm of Legends</h1>
+        <p class="text-xl mb-8">
+          Join the ultimate battle arena. Build your legend, command your squad,
+          and conquer the realm.
+        </p>
+        <a
+          href="#download"
+          class="inline-block bg-white text-indigo-600 font-semibold px-6 py-3 rounded-md hover:bg-indigo-50 dark:bg-gray-800 dark:text-indigo-400 dark:hover:bg-gray-700"
+        >
+          Download Companion App
+        </a>
+      </div>
+    </header>
+
+    <main class="space-y-24">
+      <!-- Features Section -->
+      <section id="features" class="max-w-7xl mx-auto px-4 py-16">
+        <h2 class="text-3xl font-bold text-center mb-8">Game Features</h2>
+        <div class="grid gap-8 md:grid-cols-3">
+          <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-2">Dynamic Arenas</h3>
+            <p>
+              Battle in ever-changing environments. Each match introduces new
+              obstacles, weather effects, and terrain hazards.
+            </p>
+          </div>
+          <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-2">Customizable Heroes</h3>
+            <p>
+              Choose from multiple classes—Warrior, Mage, Ranger—and customize
+              skills, armor, and abilities to fit your playstyle.
+            </p>
+          </div>
+          <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-2">Team-based Raids</h3>
+            <p>
+              Form up to 5-player teams to tackle epic boss raids. Synchronize
+              strategies and earn unique rewards.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Guides Section -->
+      <section id="guides" class="bg-white dark:bg-gray-900 py-16">
+        <div class="max-w-7xl mx-auto px-4">
+          <h2 class="text-3xl font-bold text-center mb-8">
+            Guides & Tutorials
+          </h2>
+          <div class="space-y-12">
+            <article
+              class="flex flex-col md:flex-row items-center bg-gray-50 dark:bg-gray-800 rounded-lg shadow-md p-6"
+            >
+              <img
+                src="data:image/svg+xml,<svg%20xmlns=%27http://www.w3.org/2000/svg%27%20width=%27200%27%20height=%27200%27><rect%20width=%27100%%27%20height=%27100%%27%20fill=%27%23ccc%27/><text%20x=%2750%%27%20y=%2750%%27%20dominant-baseline=%27middle%27%20text-anchor=%27middle%27%20font-size=%2720%27%20fill=%27%23666%27>Image</text></svg>"
+                alt="Class Guide"
+                class="w-full md:w-48 h-32 object-cover rounded-md mb-4 md:mb-0 md:mr-6"
+              />
+              <div>
+                <h3 class="text-2xl font-semibold mb-2">
+                  Mastering the Warrior
+                </h3>
+                <p>
+                  Learn how to maximize your damage output, manage cooldowns,
+                  and survive on the frontlines as a Warrior.
+                </p>
+              </div>
+            </article>
+            <article
+              class="flex flex-col md:flex-row items-center bg-gray-50 dark:bg-gray-800 rounded-lg shadow-md p-6"
+            >
+              <img
+                src="data:image/svg+xml,<svg%20xmlns=%27http://www.w3.org/2000/svg%27%20width=%27200%27%20height=%27200%27><rect%20width=%27100%%27%20height=%27100%%27%20fill=%27%23ccc%27/><text%20x=%2750%%27%20y=%2750%%27%20dominant-baseline=%27middle%27%20text-anchor=%27middle%27%20font-size=%2720%27%20fill=%27%23666%27>Image</text></svg>"
+                alt="Raid Strategies"
+                class="w-full md:w-48 h-32 object-cover rounded-md mb-4 md:mb-0 md:mr-6"
+              />
+              <div>
+                <h3 class="text-2xl font-semibold mb-2">Raid Boss Tactics</h3>
+                <p>
+                  Step-by-step strategies for the top 10 raid bosses. Find out
+                  which gear to equip, which mechanics to watch, and how to
+                  coordinate your team.
+                </p>
+              </div>
+            </article>
+            <article
+              class="flex flex-col md:flex-row items-center bg-gray-50 dark:bg-gray-800 rounded-lg shadow-md p-6"
+            >
+              <img
+                src="data:image/svg+xml,<svg%20xmlns=%27http://www.w3.org/2000/svg%27%20width=%27200%27%20height=%27200%27><rect%20width=%27100%%27%20height=%27100%%27%20fill=%27%23ccc%27/><text%20x=%2750%%27%20y=%2750%%27%20dominant-baseline=%27middle%27%20text-anchor=%27middle%27%20font-size=%2720%27%20fill=%27%23666%27>Image</text></svg>"
+                alt="Economy Tips"
+                class="w-full md:w-48 h-32 object-cover rounded-md mb-4 md:mb-0 md:mr-6"
+              />
+              <div>
+                <h3 class="text-2xl font-semibold mb-2">Economy & Trading</h3>
+                <p>
+                  Understand the in-game economy. Learn how to trade rare items,
+                  farm gold efficiently, and manage resources.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- News & Updates Section -->
+      <section id="news" class="max-w-7xl mx-auto px-4 py-16">
+        <h2 class="text-3xl font-bold text-center mb-8">
+          Latest News & Updates
+        </h2>
+        <div class="space-y-8">
+          <div class="bg-gray-100 dark:bg-gray-800 rounded-lg shadow-md p-6">
+            <h3 class="text-2xl font-semibold mb-2">
+              Season 5 Launches June 15
+            </h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">
+              Published: June 1, 2025
+            </p>
+            <p>
+              Season 5 introduces the Frozen Tundra map, new hero “Frostwarden”,
+              and updated matchmaking algorithms. Prepare your team for
+              frostbite conditions!
+            </p>
+          </div>
+          <div class="bg-gray-100 dark:bg-gray-800 rounded-lg shadow-md p-6">
+            <h3 class="text-2xl font-semibold mb-2">Double XP Weekend</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">
+              Published: May 28, 2025
+            </p>
+            <p>
+              From June 7–9, earn double experience points on all matches. Level
+              up faster and unlock exclusive cosmetic rewards.
+            </p>
+          </div>
+          <div class="bg-gray-100 dark:bg-gray-800 rounded-lg shadow-md p-6">
+            <h3 class="text-2xl font-semibold mb-2">New Cosmetic Bundles</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">
+              Published: May 20, 2025
+            </p>
+            <p>
+              Check out the “Mythic Legends” and “Cyber Specter” bundles in the
+              in-game store. Each bundle includes unique weapon skins, emotes,
+              and a limited-time mount.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Leaderboard Section -->
+      <section id="leaderboard" class="bg-white dark:bg-gray-900 py-16">
+        <div class="max-w-5xl mx-auto px-4">
+          <h2 class="text-3xl font-bold text-center mb-8">
+            Global Leaderboard
+          </h2>
+          <div class="overflow-x-auto">
+            <table
+              class="min-w-full table-auto bg-gray-100 dark:bg-gray-800 rounded-lg shadow-md"
+            >
+              <thead class="bg-indigo-500 dark:bg-indigo-700 text-white">
+                <tr>
+                  <th class="px-4 py-2 text-left">Rank</th>
+                  <th class="px-4 py-2 text-left">Player</th>
+                  <th class="px-4 py-2 text-left">Guild</th>
+                  <th class="px-4 py-2 text-left">Rating</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b border-gray-200 dark:border-gray-700">
+                  <td class="px-4 py-2">1</td>
+                  <td class="px-4 py-2">ShadowSlayer99</td>
+                  <td class="px-4 py-2">NightReapers</td>
+                  <td class="px-4 py-2">2987</td>
+                </tr>
+                <tr
+                  class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800"
+                >
+                  <td class="px-4 py-2">2</td>
+                  <td class="px-4 py-2">FrostMageX</td>
+                  <td class="px-4 py-2">IceWardens</td>
+                  <td class="px-4 py-2">2954</td>
+                </tr>
+                <tr class="border-b border-gray-200 dark:border-gray-700">
+                  <td class="px-4 py-2">3</td>
+                  <td class="px-4 py-2">BlazeChampion</td>
+                  <td class="px-4 py-2">FieryFist</td>
+                  <td class="px-4 py-2">2921</td>
+                </tr>
+                <tr
+                  class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800"
+                >
+                  <td class="px-4 py-2">4</td>
+                  <td class="px-4 py-2">WindWalker</td>
+                  <td class="px-4 py-2">Skybound</td>
+                  <td class="px-4 py-2">2898</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-2">5</td>
+                  <td class="px-4 py-2">StoneGuardian</td>
+                  <td class="px-4 py-2">EarthHaven</td>
+                  <td class="px-4 py-2">2875</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Download Section -->
+      <section id="download" class="max-w-7xl mx-auto px-4 py-16">
+        <div class="text-center mb-8">
+          <h2 class="text-3xl font-bold">Download the Companion App</h2>
+          <p class="mt-2 text-gray-600 dark:text-gray-400">
+            Available on Windows, macOS, Android, and iOS. Stay updated with
+            real-time stats, chat with your team, and receive live alerts.
+          </p>
+        </div>
+        <div
+          class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6"
+        >
+          <a
+            href="#"
+            class="bg-indigo-600 text-white px-6 py-3 rounded-md shadow hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600"
+          >
+            Windows Download
+          </a>
+          <a
+            href="#"
+            class="bg-green-600 text-white px-6 py-3 rounded-md shadow hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600"
+          >
+            macOS Download
+          </a>
+          <a
+            href="#"
+            class="bg-blue-600 text-white px-6 py-3 rounded-md shadow hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
+          >
+            Android (APK)
+          </a>
+          <a
+            href="#"
+            class="bg-pink-600 text-white px-6 py-3 rounded-md shadow hover:bg-pink-700 dark:bg-pink-500 dark:hover:bg-pink-600"
+          >
+            iOS (App Store)
           </a>
         </div>
-        <div class="flex items-center space-x-4">
-          <a href="#about" class="hover:text-indigo-600 dark:hover:text-indigo-400">About</a>
-          <a href="#features" class="hover:text-indigo-600 dark:hover:text-indigo-400">Features</a>
-          <a href="#guides" class="hover:text-indigo-600 dark:hover:text-indigo-400">Guides</a>
-          <a href="#leaderboard" class="hover:text-indigo-600 dark:hover:text-indigo-400">Leaderboard</a>
-          <a href="#download" class="hover:text-indigo-600 dark:hover:text-indigo-400">Download</a>
-          <button
-            onclick="toggleTheme()"
-            aria-label="Toggle Dark Mode"
-            class="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700"
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 dark:bg-gray-800 py-8">
+      <div class="max-w-7xl mx-auto px-4 text-center">
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+          &copy; 2025 Realm of Legends. All rights reserved.
+        </p>
+        <div class="flex justify-center space-x-6">
+          <a
+            href="#"
+            class="text-gray-600 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400"
           >
-            <svg
-              id="theme-icon"
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 text-gray-800 dark:text-gray-100"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
+            <span class="sr-only">Twitter</span>
+            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
               <path
-                id="moon-path"
-                class="hidden"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"
-              />
-              <path
-                id="sun-path"
-                class=""
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 2v2m0 16v2m9-10h-2M5 12H3m15.364-6.364l-1.414 1.414M7.05 16.95l-1.414 1.414m12.728 0l-1.414-1.414M7.05 7.05L5.636 5.636M12 6a6 6 0 100 12 6 6 0 000-12z"
+                d="M23 3a10.9 10.9 0 01-3.14 1.53A4.48 4.48 0 0012 5.28a4.48 4.48 0 00-4.47 4.47c0 .35.04.69.11 1.01A12.76 12.76 0 013 4.67a4.44 4.44 0 001.38 5.94 4.41 4.41 0 01-2.03-.56v.06a4.48 4.48 0 003.59 4.39 4.5 4.5 0 01-2.02.08 4.48 4.48 0 004.18 3.11A9 9 0 011 19.54a12.74 12.74 0 006.88 2.02c8.27 0 12.8-6.85 12.8-12.8 0-.2-.01-.39-.02-.58A9.2 9.2 0 0023 3z"
               />
             </svg>
-          </button>
+          </a>
+          <a
+            href="#"
+            class="text-gray-600 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400"
+          >
+            <span class="sr-only">Discord</span>
+            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M20.317 4.369a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.211.375-.446.864-.612 1.249-1.859-.28-3.68-.28-5.486 0-.166-.393-.412-.874-.633-1.249a.077.077 0 00-.079-.037 19.736 19.736 0 00-4.885 1.515.069.069 0 00-.032.027C2.274 9.045 1.44 13.58 1.558 18.057a.081.081 0 00.028.056 19.9 19.9 0 005.995 3.016.077.077 0 00.084-.027c.462-.63.873-1.295 1.226-1.994a.076.076 0 00-.041-.104 13.386 13.386 0 01-1.92-.917.077.077 0 01-.007-.131c.129-.096.258-.192.383-.291a.074.074 0 01.077-.007c3.99 1.82 8.292 1.82 12.15 0a.074.074 0 01.078.007c.125.099.254.195.382.291a.077.077 0 01-.006.131 13.444 13.444 0 01-1.92.917.076.076 0 00-.04.104 20.172 20.172 0 001.225 1.994.077.077 0 00.084.026 19.864 19.864 0 006-3.016.081.081 0 00.028-.056c.297-5.177-.559-9.642-2.859-13.661a.061.061 0 00-.03-.028zM8.02 15.331c-1.183 0-2.156-1.085-2.156-2.419 0-1.333.955-2.419 2.156-2.419 1.21 0 2.174 1.095 2.156 2.419 0 1.334-.955 2.419-2.156 2.419zm7.974 0c-1.183 0-2.156-1.085-2.156-2.419 0-1.333.955-2.419 2.156-2.419 1.21 0 2.174 1.095 2.156 2.419 0 1.334-.946 2.419-2.156 2.419z"
+              />
+            </svg>
+          </a>
+          <a
+            href="#"
+            class="text-gray-600 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400"
+          >
+            <span class="sr-only">YouTube</span>
+            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M19.615 3.184A3.003 3.003 0 0017.546 2C15.847 2 12 2 12 2s-3.848 0-5.546.184A3.003 3.003 0 004.386 3.184 3.087 3.087 0 003.184 4.386C3 5.984 3 10.832 3 10.832s0 4.847.184 6.546a3.087 3.087 0 001.202 1.202C5.153 19 10 19 10 19s4.847 0 6.546-.184a3.087 3.087 0 001.202-1.202c.184-1.7.184-6.546.184-6.546s0-4.847-.184-6.546a3.087 3.087 0 00-1.202-1.202zM9.545 14.568V7.096l6.182 3.736-6.182 3.736z"
+              />
+            </svg>
+          </a>
         </div>
       </div>
-    </div>
-  </nav>
+    </footer>
 
-  <!-- Hero Section -->
-  <header
-    id="about"
-    class="pt-20 bg-gradient-to-r from-indigo-500 to-purple-600 dark:from-gray-800 dark:to-gray-900 text-white"
-  >
-    <div class="max-w-7xl mx-auto py-20 px-4 text-center">
-      <h1 class="text-5xl font-extrabold mb-4">Realm of Legends</h1>
-      <p class="text-xl mb-8">
-        Join the ultimate battle arena. Build your legend, command your squad, and conquer the realm.
-      </p>
-      <a
-        href="#download"
-        class="inline-block bg-white text-indigo-600 font-semibold px-6 py-3 rounded-md hover:bg-indigo-50 dark:bg-gray-800 dark:text-indigo-400 dark:hover:bg-gray-700"
-      >
-        Download Companion App
-      </a>
-    </div>
-  </header>
+    <!-- Theme Icon Switch (Sun/Moon) -->
+    <script>
+      const sunPath = document.getElementById("sun-path");
+      const moonPath = document.getElementById("moon-path");
 
-  <main class="space-y-24">
-    <!-- Features Section -->
-    <section id="features" class="max-w-7xl mx-auto px-4 py-16">
-      <h2 class="text-3xl font-bold text-center mb-8">Game Features</h2>
-      <div class="grid gap-8 md:grid-cols-3">
-        <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold mb-2">Dynamic Arenas</h3>
-          <p>
-            Battle in ever-changing environments. Each match introduces new obstacles, weather
-            effects, and terrain hazards.
-          </p>
-        </div>
-        <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold mb-2">Customizable Heroes</h3>
-          <p>
-            Choose from multiple classes—Warrior, Mage, Ranger—and customize skills, armor, and
-            abilities to fit your playstyle.
-          </p>
-        </div>
-        <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold mb-2">Team-based Raids</h3>
-          <p>
-            Form up to 5-player teams to tackle epic boss raids. Synchronize strategies and earn
-            unique rewards.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Guides Section -->
-    <section id="guides" class="bg-white dark:bg-gray-900 py-16">
-      <div class="max-w-7xl mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-8">Guides & Tutorials</h2>
-        <div class="space-y-12">
-          <article class="flex flex-col md:flex-row items-center bg-gray-50 dark:bg-gray-800 rounded-lg shadow-md p-6">
-            <img
-              src="data:image/svg+xml,<svg%20xmlns=%27http://www.w3.org/2000/svg%27%20width=%27200%27%20height=%27200%27><rect%20width=%27100%%27%20height=%27100%%27%20fill=%27%23ccc%27/><text%20x=%2750%%27%20y=%2750%%27%20dominant-baseline=%27middle%27%20text-anchor=%27middle%27%20font-size=%2720%27%20fill=%27%23666%27>Image</text></svg>"
-              alt="Class Guide"
-              class="w-full md:w-48 h-32 object-cover rounded-md mb-4 md:mb-0 md:mr-6"
-            />
-            <div>
-              <h3 class="text-2xl font-semibold mb-2">Mastering the Warrior</h3>
-              <p>
-                Learn how to maximize your damage output, manage cooldowns, and survive on the
-                frontlines as a Warrior.
-              </p>
-            </div>
-          </article>
-          <article class="flex flex-col md:flex-row items-center bg-gray-50 dark:bg-gray-800 rounded-lg shadow-md p-6">
-            <img
-              src="data:image/svg+xml,<svg%20xmlns=%27http://www.w3.org/2000/svg%27%20width=%27200%27%20height=%27200%27><rect%20width=%27100%%27%20height=%27100%%27%20fill=%27%23ccc%27/><text%20x=%2750%%27%20y=%2750%%27%20dominant-baseline=%27middle%27%20text-anchor=%27middle%27%20font-size=%2720%27%20fill=%27%23666%27>Image</text></svg>"
-              alt="Raid Strategies"
-              class="w-full md:w-48 h-32 object-cover rounded-md mb-4 md:mb-0 md:mr-6"
-            />
-            <div>
-              <h3 class="text-2xl font-semibold mb-2">Raid Boss Tactics</h3>
-              <p>
-                Step-by-step strategies for the top 10 raid bosses. Find out which gear to equip,
-                which mechanics to watch, and how to coordinate your team.
-              </p>
-            </div>
-          </article>
-          <article class="flex flex-col md:flex-row items-center bg-gray-50 dark:bg-gray-800 rounded-lg shadow-md p-6">
-            <img
-              src="data:image/svg+xml,<svg%20xmlns=%27http://www.w3.org/2000/svg%27%20width=%27200%27%20height=%27200%27><rect%20width=%27100%%27%20height=%27100%%27%20fill=%27%23ccc%27/><text%20x=%2750%%27%20y=%2750%%27%20dominant-baseline=%27middle%27%20text-anchor=%27middle%27%20font-size=%2720%27%20fill=%27%23666%27>Image</text></svg>"
-              alt="Economy Tips"
-              class="w-full md:w-48 h-32 object-cover rounded-md mb-4 md:mb-0 md:mr-6"
-            />
-            <div>
-              <h3 class="text-2xl font-semibold mb-2">Economy & Trading</h3>
-              <p>
-                Understand the in-game economy. Learn how to trade rare items, farm gold efficiently,
-                and manage resources.
-              </p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- News & Updates Section -->
-    <section id="news" class="max-w-7xl mx-auto px-4 py-16">
-      <h2 class="text-3xl font-bold text-center mb-8">Latest News & Updates</h2>
-      <div class="space-y-8">
-        <div class="bg-gray-100 dark:bg-gray-800 rounded-lg shadow-md p-6">
-          <h3 class="text-2xl font-semibold mb-2">Season 5 Launches June 15</h3>
-          <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Published: June 1, 2025</p>
-          <p>
-            Season 5 introduces the Frozen Tundra map, new hero “Frostwarden”, and updated matchmaking
-            algorithms. Prepare your team for frostbite conditions!
-          </p>
-        </div>
-        <div class="bg-gray-100 dark:bg-gray-800 rounded-lg shadow-md p-6">
-          <h3 class="text-2xl font-semibold mb-2">Double XP Weekend</h3>
-          <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Published: May 28, 2025</p>
-          <p>
-            From June 7–9, earn double experience points on all matches. Level up faster and unlock
-            exclusive cosmetic rewards.
-          </p>
-        </div>
-        <div class="bg-gray-100 dark:bg-gray-800 rounded-lg shadow-md p-6">
-          <h3 class="text-2xl font-semibold mb-2">New Cosmetic Bundles</h3>
-          <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Published: May 20, 2025</p>
-          <p>
-            Check out the “Mythic Legends” and “Cyber Specter” bundles in the in-game store. Each
-            bundle includes unique weapon skins, emotes, and a limited-time mount.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Leaderboard Section -->
-    <section id="leaderboard" class="bg-white dark:bg-gray-900 py-16">
-      <div class="max-w-5xl mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-8">Global Leaderboard</h2>
-        <div class="overflow-x-auto">
-          <table class="min-w-full table-auto bg-gray-100 dark:bg-gray-800 rounded-lg shadow-md">
-            <thead class="bg-indigo-500 dark:bg-indigo-700 text-white">
-              <tr>
-                <th class="px-4 py-2 text-left">Rank</th>
-                <th class="px-4 py-2 text-left">Player</th>
-                <th class="px-4 py-2 text-left">Guild</th>
-                <th class="px-4 py-2 text-left">Rating</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="border-b border-gray-200 dark:border-gray-700">
-                <td class="px-4 py-2">1</td>
-                <td class="px-4 py-2">ShadowSlayer99</td>
-                <td class="px-4 py-2">NightReapers</td>
-                <td class="px-4 py-2">2987</td>
-              </tr>
-              <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
-                <td class="px-4 py-2">2</td>
-                <td class="px-4 py-2">FrostMageX</td>
-                <td class="px-4 py-2">IceWardens</td>
-                <td class="px-4 py-2">2954</td>
-              </tr>
-              <tr class="border-b border-gray-200 dark:border-gray-700">
-                <td class="px-4 py-2">3</td>
-                <td class="px-4 py-2">BlazeChampion</td>
-                <td class="px-4 py-2">FieryFist</td>
-                <td class="px-4 py-2">2921</td>
-              </tr>
-              <tr class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
-                <td class="px-4 py-2">4</td>
-                <td class="px-4 py-2">WindWalker</td>
-                <td class="px-4 py-2">Skybound</td>
-                <td class="px-4 py-2">2898</td>
-              </tr>
-              <tr>
-                <td class="px-4 py-2">5</td>
-                <td class="px-4 py-2">StoneGuardian</td>
-                <td class="px-4 py-2">EarthHaven</td>
-                <td class="px-4 py-2">2875</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- Download Section -->
-    <section id="download" class="max-w-7xl mx-auto px-4 py-16">
-      <div class="text-center mb-8">
-        <h2 class="text-3xl font-bold">Download the Companion App</h2>
-        <p class="mt-2 text-gray-600 dark:text-gray-400">
-          Available on Windows, macOS, Android, and iOS. Stay updated with real-time stats, chat
-          with your team, and receive live alerts.
-        </p>
-      </div>
-      <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
-        <a
-          href="#"
-          class="bg-indigo-600 text-white px-6 py-3 rounded-md shadow hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600"
-        >
-          Windows Download
-        </a>
-        <a
-          href="#"
-          class="bg-green-600 text-white px-6 py-3 rounded-md shadow hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600"
-        >
-          macOS Download
-        </a>
-        <a
-          href="#"
-          class="bg-blue-600 text-white px-6 py-3 rounded-md shadow hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
-        >
-          Android (APK)
-        </a>
-        <a
-          href="#"
-          class="bg-pink-600 text-white px-6 py-3 rounded-md shadow hover:bg-pink-700 dark:bg-pink-500 dark:hover:bg-pink-600"
-        >
-          iOS (App Store)
-        </a>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer class="bg-gray-100 dark:bg-gray-800 py-8">
-    <div class="max-w-7xl mx-auto px-4 text-center">
-      <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">&copy; 2025 Realm of Legends. All rights reserved.</p>
-      <div class="flex justify-center space-x-6">
-        <a href="#" class="text-gray-600 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400">
-          <span class="sr-only">Twitter</span>
-          <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-            <path
-              d="M23 3a10.9 10.9 0 01-3.14 1.53A4.48 4.48 0 0012 5.28a4.48 4.48 0 00-4.47 4.47c0 .35.04.69.11 1.01A12.76 12.76 0 013 4.67a4.44 4.44 0 001.38 5.94 4.41 4.41 0 01-2.03-.56v.06a4.48 4.48 0 003.59 4.39 4.5 4.5 0 01-2.02.08 4.48 4.48 0 004.18 3.11A9 9 0 011 19.54a12.74 12.74 0 006.88 2.02c8.27 0 12.8-6.85 12.8-12.8 0-.2-.01-.39-.02-.58A9.2 9.2 0 0023 3z"
-            />
-          </svg>
-        </a>
-        <a href="#" class="text-gray-600 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400">
-          <span class="sr-only">Discord</span>
-          <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-            <path
-              d="M20.317 4.369a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.211.375-.446.864-.612 1.249-1.859-.28-3.68-.28-5.486 0-.166-.393-.412-.874-.633-1.249a.077.077 0 00-.079-.037 19.736 19.736 0 00-4.885 1.515.069.069 0 00-.032.027C2.274 9.045 1.44 13.58 1.558 18.057a.081.081 0 00.028.056 19.9 19.9 0 005.995 3.016.077.077 0 00.084-.027c.462-.63.873-1.295 1.226-1.994a.076.076 0 00-.041-.104 13.386 13.386 0 01-1.92-.917.077.077 0 01-.007-.131c.129-.096.258-.192.383-.291a.074.074 0 01.077-.007c3.99 1.82 8.292 1.82 12.15 0a.074.074 0 01.078.007c.125.099.254.195.382.291a.077.077 0 01-.006.131 13.444 13.444 0 01-1.92.917.076.076 0 00-.04.104 20.172 20.172 0 001.225 1.994.077.077 0 00.084.026 19.864 19.864 0 006-3.016.081.081 0 00.028-.056c.297-5.177-.559-9.642-2.859-13.661a.061.061 0 00-.03-.028zM8.02 15.331c-1.183 0-2.156-1.085-2.156-2.419 0-1.333.955-2.419 2.156-2.419 1.21 0 2.174 1.095 2.156 2.419 0 1.334-.955 2.419-2.156 2.419zm7.974 0c-1.183 0-2.156-1.085-2.156-2.419 0-1.333.955-2.419 2.156-2.419 1.21 0 2.174 1.095 2.156 2.419 0 1.334-.946 2.419-2.156 2.419z"
-            />
-          </svg>
-        </a>
-        <a href="#" class="text-gray-600 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400">
-          <span class="sr-only">YouTube</span>
-          <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-            <path
-              d="M19.615 3.184A3.003 3.003 0 0017.546 2C15.847 2 12 2 12 2s-3.848 0-5.546.184A3.003 3.003 0 004.386 3.184 3.087 3.087 0 003.184 4.386C3 5.984 3 10.832 3 10.832s0 4.847.184 6.546a3.087 3.087 0 001.202 1.202C5.153 19 10 19 10 19s4.847 0 6.546-.184a3.087 3.087 0 001.202-1.202c.184-1.7.184-6.546.184-6.546s0-4.847-.184-6.546a3.087 3.087 0 00-1.202-1.202zM9.545 14.568V7.096l6.182 3.736-6.182 3.736z"
-            />
-          </svg>
-        </a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Theme Icon Switch (Sun/Moon) -->
-  <script>
-    const sunPath = document.getElementById('sun-path');
-    const moonPath = document.getElementById('moon-path');
-
-    function updateIcon() {
-      if (document.documentElement.classList.contains('dark')) {
-        sunPath.classList.remove('hidden');
-        moonPath.classList.add('hidden');
-      } else {
-        sunPath.classList.add('hidden');
-        moonPath.classList.remove('hidden');
+      function updateIcon() {
+        if (document.documentElement.classList.contains("dark")) {
+          sunPath.classList.remove("hidden");
+          moonPath.classList.add("hidden");
+        } else {
+          sunPath.classList.add("hidden");
+          moonPath.classList.remove("hidden");
+        }
       }
-    }
 
-    // Run on load
-    updateIcon();
-
-    // Update icon whenever theme toggles
-    document.querySelector('button[aria-label="Toggle Dark Mode"]').addEventListener('click', updateIcon);
-  </script>
-</body>
+      // Run on load
+      updateIcon();
+    </script>
+  </body>
 </html>
